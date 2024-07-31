@@ -1,2 +1,0 @@
-android.permissions = SEND_SMS,RECEIVE_SMS,READ_SMS
-android.add_src = javafiles
