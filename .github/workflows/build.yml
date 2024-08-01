@@ -42,15 +42,18 @@ jobs:
           mv $ANDROID_HOME/cmdline-tools/cmdline-tools/* $ANDROID_HOME/cmdline-tools/latest
           yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROID_HOME --licenses
           $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROID_HOME --install "platform-tools" "platforms;android-30" "build-tools;30.0.3" "ndk;21.4.7075529" "tools"
-          export PATH=$PATH:$ANDROID_HOME/platform-tools:$ANDROID_HOME/build-tools/30.0.3:$ANDROID_HOME/tools/bin
-
+          export PATH=$PATH:$ANDROID_HOME/platform-tools:$ANDROID_HOME/build-tools/30.0.3:$ANDROID_HOME/tools/bin:$ANDROID_HOME/cmdline-tools/latest/bin
+          
       - name: Set up local.properties
         run: |
           echo "sdk.dir=$ANDROID_HOME" > local.properties
           echo "ndk.dir=$ANDROID_HOME/ndk/21.4.7075529" >> local.properties
 
       - name: Verify aidl installation
-        run: which aidl
+        run: |
+          echo "Verifying aidl tool installation..."
+          echo "PATH is: $PATH"
+          which aidl
 
       - name: Build with Buildozer
         run: buildozer android debug
