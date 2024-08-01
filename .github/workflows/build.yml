@@ -5,7 +5,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-20.0.4
+    runs-on: ubuntu
 
     steps:
       - uses: actions/checkout@v2
