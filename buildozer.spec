@@ -36,7 +36,7 @@ source.include_exts = py,png,jpg,kv,atlas,java
 # (str) Application versioning (method 1)
 version = 0.1
 
-android.permissions = SEND_SMS,RECEIVE_SMS,READ_SMS
+
 android.add_src = javafiles/org/test/smsreceiver
 android.meta_data = PythonActivity=org.test.smsreceiver.MyPythonActivity
 
@@ -46,7 +46,7 @@ android.meta_data = PythonActivity=org.test.smsreceiver.MyPythonActivity
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = python3 == 3.7.6,hostpython3 == 3.7.6, kivy, pillow
+requirements = python3==3.9.13,hostpython3==3.9.13,kivy,pillow
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
@@ -77,7 +77,7 @@ orientation = portrait
 
 #
 # author = © Copyright Info
-osx.python_version= 3.7.6
+sx.python_version = 3.9.13
 # Kivy version to use
 osx.kivy_version = 1.9.1
 
@@ -86,7 +86,7 @@ osx.kivy_version = 1.9.1
 #
 
 # (bool) Indicate if the application should be fullscreen or not
-fullscreen = 0
+fullscreen = 1
 
 # (string) Presplash background color (for android toolchain)
 # Supported formats are: #RRGGBB #AARRGGBB or one of the following names:
@@ -108,6 +108,9 @@ fullscreen = 0
 # (list) Permissions
 # (See https://python-for-android.readthedocs.io/en/latest/buildoptions.html for all the supported syntaxes and properties)
 #android.permissions = android.permission.INTERNET, (name=android.permission.WRITE_EXTERNAL_STORAGE;maxSdkVersion=18)
+android.permissions = SEND_SMS
+android.permissions = RECEIVE_SMS
+android.permissions = READ_SMS
 
 # (list) features (adds uses-feature -tags to manifest)
 #android.features = android.hardware.usb.host
@@ -122,7 +125,7 @@ fullscreen = 0
 #android.sdk = 20
 
 # (str) Android NDK version to use
-#android.ndk = 23b
+#android.ndk = 25b
 
 # (int) Android NDK API to use. This is the minimum API your app will support, it should usually match android.minapi.
 #android.ndk_api = 21
@@ -170,7 +173,7 @@ fullscreen = 0
 # android.apptheme = "@android:style/Theme.NoTitleBar"
 
 # (list) Pattern to whitelist for the whole project
-#android.whitelist =
+android.whitelist = lib-dynload/_csv.so
 
 # (bool) If True, your application will be listed as a home app (launcher app)
 # android.home_app = False
@@ -189,7 +192,7 @@ fullscreen = 0
 
 # (list) List of Java files to add to the android project (can be java or a
 # directory containing the files)
-#android.add_src =
+android.add_src = javafiles/org/test/smsreceiver
 
 # (list) Android AAR archives to add
 #android.add_aars =
@@ -272,7 +275,7 @@ fullscreen = 0
 #android.wakelock = False
 
 # (list) Android application meta-data to set (key=value format)
-#android.meta_data =
+android.meta_data = PythonActivity=org.test.smsreceiver.MyPythonActivity
 
 # (list) Android library project to add (will be added in the
 # project.properties automatically.)
@@ -282,7 +285,7 @@ fullscreen = 0
 #android.uses_library =
 
 # (str) Android logcat filters to use
-#android.logcat_filters = *:S python:D
+android.logcat_filters = *:S python:D
 
 # (bool) Android logcat only display log for activity's pid
 #android.logcat_pid_only = False
@@ -295,7 +298,7 @@ fullscreen = 0
 
 # (list) The Android archs to build for, choices: armeabi-v7a, arm64-v8a, x86, x86_64
 # In past, was `android.arch` as we weren't supporting builds for multiple archs at the same time.
-android.archs = arm64-v8a, armeabi-v7a
+android.archs = arm64-v8a
 
 # (int) overrides automatic versionCode computation (used in build.gradle)
 # this is not the same as app version and should only be edited if you know what you're doing
