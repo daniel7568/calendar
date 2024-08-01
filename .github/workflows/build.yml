@@ -1,7 +1,7 @@
 name: CI
 on:
   push:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   build:
@@ -15,27 +15,24 @@ jobs:
       # used to cache dependencies with a timeout
       - name: Get Date
         id: get-date
-        run: |
-          echo "date=$(date -u '+%Y%m%d')" >> $GITHUB_ENV
+        run: echo "DATE=$(date -u '+%Y%m%d')" >> $GITHUB_ENV
         shell: bash
 
       - name: Cache Buildozer global directory
-        uses: actions/cache@v3   
-
+        uses: actions/cache@v3
         with:
           path: .buildozer_global
-          key: buildozer-global-${{ hashFiles('buildozer.spec') }} # Replace with your path
+          key: buildozer-global-${{ hashFiles('buildozer.spec') }}
 
-- name: Cache Buildozer build directory 
-  uses: actions/cache@v3
-  with:
-    path: .buildozer
-    key: ${{ runner.os }}-${{ env.DATE }}-${{ hashFiles('buildozer.spec') }}
-    restore-keys: |
-      ${{ runner.os }}-node-
+      - name: Cache Buildozer build directory
+        uses: actions/cache@v3
+        with:
+          path: .buildozer
+          key: ${{ runner.os }}-${{ env.DATE }}-${{ hashFiles('buildozer.spec') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
-      # Correct indentation
-      - name: Run your Node.js action
+      - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '16'
@@ -45,12 +42,10 @@ jobs:
         id: buildozer
         with:
           command: buildozer android debug
-          buildozer_version:   
- stable:
+          buildozer_version: stable
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
           name: package
-          path: ${{ steps.buildozer.outputs.filename   
- }}
+          path: ${{ steps.buildozer.outputs.filename }}
