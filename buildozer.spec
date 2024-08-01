@@ -76,7 +76,7 @@ orientation = portrait
 # author = © Copyright Info
 sx.python_version = 3.9.13
 # Kivy version to use
-osx.kivy_version = 1.9.1
+osx.kivy_version = 2.3.0
 
 #
 # Android specific
