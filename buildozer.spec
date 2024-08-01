@@ -37,9 +37,6 @@ source.include_exts = py,png,jpg,kv,atlas,java
 version = 0.1
 
 
-android.add_src = javafiles/org/test/smsreceiver
-android.meta_data = PythonActivity=org.test.smsreceiver.MyPythonActivity
-
 # (str) Application versioning (method 2)
 # version.regex = __version__ = ['"](.*)['"]
 # version.filename = %(source.dir)s/main.py
@@ -108,9 +105,7 @@ fullscreen = 1
 # (list) Permissions
 # (See https://python-for-android.readthedocs.io/en/latest/buildoptions.html for all the supported syntaxes and properties)
 #android.permissions = android.permission.INTERNET, (name=android.permission.WRITE_EXTERNAL_STORAGE;maxSdkVersion=18)
-android.permissions = SEND_SMS
-android.permissions = RECEIVE_SMS
-android.permissions = READ_SMS
+android.permissions = SEND_SMS RECEIVE_SMS READ_SMS
 
 # (list) features (adds uses-feature -tags to manifest)
 #android.features = android.hardware.usb.host
