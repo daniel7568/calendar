@@ -12,11 +12,10 @@ jobs:
         with:
           submodules: recursive
 
-      # used to cache dependencies with a timeout
-      - name: Get Date
-        id: get-date
-        run: echo "DATE=$(date -u '+%Y%m%d')" >> $GITHUB_ENV
-        shell: bash
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.11'
 
       - name: Cache Buildozer global directory
         uses: actions/cache@v3
@@ -37,15 +36,14 @@ jobs:
         with:
           node-version: '16'
 
+      - name: Install Buildozer
+        run: pip install buildozer
+
       - name: Build with Buildozer
-        uses: ArtemSBulgakov/buildozer-action@v1
-        id: buildozer
-        with:
-          command: buildozer android debug
-          buildozer_version: stable
+        run: buildozer android debug
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
           name: package
-          path: ${{ steps.buildozer.outputs.filename }}
+          path: bin/*.apk
