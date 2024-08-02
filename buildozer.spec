@@ -1,4 +1,4 @@
-[app]
+[app] 
 title = cookin calendar
 package.name = myapp
 package.domain = org.test
