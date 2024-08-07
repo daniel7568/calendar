@@ -5,7 +5,7 @@ package.domain = org.test
 source.dir = .
 source.include_exts = py,png,jpg,kv,atlas,java
 version = 0.1
-requirements = python3,hostpython3==3.11.0,kivy,pillow
+requirements = python3==3.11.0,hostpython3==3.11.0,kivy,pillow
 orientation = portrait
 fullscreen = 1
 android.permissions = SEND_SMS, RECEIVE_SMS, READ_SMS
