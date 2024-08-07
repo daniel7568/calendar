@@ -40,6 +40,9 @@ jobs:
 
       - name: Accept Android SDK Licenses
         run: |
+          mkdir -p $ANDROID_HOME/licenses
+          echo "24333f8a63b6825ea9c5514f83c2829b004d1fee" > $ANDROID_HOME/licenses/android-sdk-license
+          echo "84831b9409646a918e30573bab4c9c91346d8abd" > $ANDROID_HOME/licenses/android-sdk-preview-license
           yes | sdkmanager --licenses
 
       - name: Install Android SDK components
@@ -51,6 +54,16 @@ jobs:
           echo "$ANDROID_HOME/platform-tools" >> $GITHUB_PATH
           echo "$ANDROID_HOME/build-tools/33.0.0" >> $GITHUB_PATH
           echo "$ANDROID_HOME/ndk/25.1.8937393" >> $GITHUB_PATH
+
+      - name: Verify Android SDK installation
+        run: |
+          ls -R $ANDROID_HOME
+          which aidl
+
+      - name: Update Buildozer.spec
+        run: |
+          sed -i 's|^android.sdk_path =.*|android.sdk_path = '$ANDROID_HOME'|' buildozer.spec
+          sed -i 's|^android.ndk_path =.*|android.ndk_path = '$ANDROID_HOME'/ndk/25.1.8937393|' buildozer.spec
 
       - name: Setup Python-for-Android
         run: |
