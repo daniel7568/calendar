@@ -16,6 +16,8 @@ android.archs = arm64-v8a
 android.allow_backup = True
 android.debug_artifact = apk
 android.api = 33
+android.sdk = 33
+android.ndk = 25.1.8937393
 android.build_tools = 33.0.0
 [buildozer]
 log_level = 2
