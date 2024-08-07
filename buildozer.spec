@@ -15,7 +15,8 @@ android.copy_libs = 1
 android.archs = arm64-v8a
 android.allow_backup = True
 android.debug_artifact = apk
-
+android.api = 33
+android.build_tools = 33.0.0
 [buildozer]
 log_level = 2
 warn_on_root = 1
