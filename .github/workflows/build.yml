@@ -35,23 +35,19 @@ jobs:
           java-version: '11'
           distribution: 'temurin'
 
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v2
+      - name: Setup Android SDK and NDK
+        run: |
+          wget https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip
+          unzip commandlinetools-linux-8092744_latest.zip -d android-sdk
+          echo "ANDROID_HOME=$PWD/android-sdk" >> $GITHUB_ENV
+          echo "ANDROID_SDK_ROOT=$PWD/android-sdk" >> $GITHUB_ENV
+          echo "$PWD/android-sdk/cmdline-tools/latest/bin" >> $GITHUB_PATH
+          sdkmanager --sdk_root=${ANDROID_SDK_ROOT} "platform-tools" "platforms;android-33" "build-tools;33.0.0" "ndk;25.1.8937393"
+          echo "ANDROID_NDK_HOME=$PWD/android-sdk/ndk/25.1.8937393" >> $GITHUB_ENV
 
       - name: Accept Android SDK Licenses
         run: |
-          yes | sdkmanager --licenses
-
-      - name: Install Android SDK components
-        run: |
-          sdkmanager "platform-tools" "platforms;android-33" "build-tools;33.0.0" "ndk;25.1.8937393"
-          echo "ANDROID_HOME=$ANDROID_HOME" >> $GITHUB_ENV
-          echo "ANDROID_SDK_ROOT=$ANDROID_SDK_ROOT" >> $GITHUB_ENV
-          echo "ANDROID_NDK_HOME=$ANDROID_HOME/ndk/25.1.8937393" >> $GITHUB_ENV
-          echo "$ANDROID_HOME/tools" >> $GITHUB_PATH
-          echo "$ANDROID_HOME/platform-tools" >> $GITHUB_PATH
-          echo "$ANDROID_HOME/build-tools/33.0.0" >> $GITHUB_PATH
-          echo "$ANDROID_HOME/ndk/25.1.8937393" >> $GITHUB_PATH
+          yes | sdkmanager --sdk_root=${ANDROID_SDK_ROOT} --licenses
 
       - name: Update Buildozer.spec
         run: |
