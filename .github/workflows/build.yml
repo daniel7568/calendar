@@ -53,13 +53,10 @@ jobs:
           echo "sdk.dir=$ANDROID_HOME" > local.properties
           echo "ndk.dir=$ANDROID_HOME/ndk/25.1.8937393" >> local.properties
 
-      - name: Initialize Buildozer
-        run: |
-          buildozer init
-          sed -i 's/^android.sdk_path =.*/android.sdk_path = $ANDROID_HOME/' buildozer.spec
-          sed -i 's/^android.ndk_path =.*/android.ndk_path = $ANDROID_HOME\/ndk\/25.1.8937393/' buildozer.spec
-
       - name: Build with Buildozer
+        env:
+          ANDROID_HOME: ${{ env.ANDROID_HOME }}
+          ANDROID_NDK_HOME: ${{ env.ANDROID_HOME }}/ndk/25.1.8937393
         run: |
           buildozer android debug
 
