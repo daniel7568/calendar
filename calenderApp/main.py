@@ -65,9 +65,6 @@ class CalendarApp(App):
         self.update_calendar()
         return self.main_layout
 
-        self.update_calendar()
-        return self.main_layout
-
     def update_calendar(self, instance=None):
         self.calendar_grid.clear_widgets()
         year = int(self.year_input.text)
